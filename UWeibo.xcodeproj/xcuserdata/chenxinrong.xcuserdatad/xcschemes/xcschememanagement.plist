@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>UWeibo.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>69610FC91EC3D88E00D43EE8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>69610FE21EC3D88E00D43EE8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>69610FED1EC3D88E00D43EE8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
