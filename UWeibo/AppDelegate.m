@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "OAuth.h"
+#import "WBTabBarController.h"
+#import "OAuthViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +19,21 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor redColor];
+    
+    
+    NSString* doc=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+    NSString* file=[doc stringByAppendingString:@"/accout.data"];
+    OAuth * acc=[NSKeyedUnarchiver unarchiveObjectWithFile:file];
+    if (acc) {
+        self.window.rootViewController = [[WBTabBarController alloc]init];
+        }
+    else{
+        self.window.rootViewController = [[OAuthViewController alloc]init];
+    }
+    [self.window makeKeyAndVisible];
+
     return YES;
 }
 
