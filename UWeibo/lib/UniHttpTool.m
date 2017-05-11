@@ -24,7 +24,8 @@
            failure:(void (^)(NSError *error ))failure{
 
     AFHTTPSessionManager* manager=[AFHTTPSessionManager manager];
-    
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
+
     [manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
       
@@ -44,6 +45,8 @@
            success:(void (^)(id  json))success
            failure:(void (^)(NSError *error))failure{
     AFHTTPSessionManager* manager=[AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
+
     [manager POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
         
@@ -65,7 +68,8 @@
     AFHTTPSessionManager* manager=[AFHTTPSessionManager manager];
     [manager GET:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
-        
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
+    
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
             success(responseObject);
@@ -84,6 +88,8 @@
           failure:(void (^)(NSError *error))failure{
 
     AFHTTPSessionManager* manager=[AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain",nil];
+
     [manager GET:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
         

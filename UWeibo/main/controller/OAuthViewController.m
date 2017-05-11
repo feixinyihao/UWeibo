@@ -37,11 +37,11 @@
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     
-    //NSLog(@"%@",request.URL);
+    NSLog(@"%@",request.URL);
     NSString* urlstr=request.URL.absoluteString;
     NSRange rang=[urlstr rangeOfString:@"code="];
     if (rang.length) {
-        int loc=rang.location+rang.length;
+        NSInteger loc=rang.location+rang.length;
         NSString* code=[urlstr substringFromIndex:loc];
         NSLog(@"==%@",urlstr);
         NSLog(@"===%@",code);
