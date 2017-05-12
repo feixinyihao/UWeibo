@@ -28,6 +28,7 @@
     [super viewDidLoad];
    
     [self setupStatus];
+  
     
     /**下拉刷新
      */
@@ -39,16 +40,8 @@
     /**
      *  上拉加载更多
      */
-
-
-   // [self setupStatus];
- 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
 /**
  *  初始化微博信息
  */
@@ -66,15 +59,13 @@
     
         NSLog(@"加载中。。。");
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"weibo%@",responseObject[@"statuses"]);
+        //NSLog(@"weibo%@",responseObject[@"statuses"]);
         NSMutableArray* statusArr=[NSMutableArray array];
         //self.statuses=responseObject[@"status"];
         for (NSDictionary * statusDic in responseObject[@"statuses"]) {
             WeiboStatus* status=[WeiboStatus statusWithDict:statusDic];
             [statusArr addObject:status];
-            
-            
-            NSLog(@"--%@",status.pic_urls);
+            //NSLog(@"--%@",status.pic_urls);
             
         }
         if (self.statuses==nil) {
@@ -207,70 +198,10 @@
     
     [self.navigationController pushViewController:content animated:YES];
     
-   // NSLog(@"---%ld",(long)indexPath.row);
 }
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 
-//    if (indexPath.row == 0) {
-//        //定义一个UIView
-//        UIView *headSpinnerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 60.0f)];
-//        
-//       //顶一个有刷新图标的view
-//         UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(130.0f, 0.0f, 60.0f, 60.0f)];
-//        activity.color = [UIColor redColor];
-//        [activity startAnimating];//启动有刷新图标的view
-//        
-//        headSpinnerView.backgroundColor = [UIColor grayColor];
-//        [headSpinnerView addSubview:activity];
-//        
-//                //设置footerview
-//        self.tableView.tableHeaderView = headSpinnerView;
-//    
-//        [self setupStatus];
-//    }
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

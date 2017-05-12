@@ -31,7 +31,7 @@
     // 3.昵称
     CGFloat nameLabelX = CGRectGetMaxX(_iconViewF) + WBStatusCellBorder;
     CGFloat nameLabelY = iconViewY;
-    CGSize nameLabelSize = [status.user.name sizeWithFont:WBStatusNameFont];
+    CGSize nameLabelSize=[status.user.name sizeWithAttributes:@{NSFontAttributeName:WBStatusNameFont}];
     _nameLabelF = (CGRect){{nameLabelX, nameLabelY}, nameLabelSize};
     
     // 4.会员图标
@@ -46,32 +46,38 @@
     // 5.时间
     CGFloat timeLabelX = nameLabelX;
     CGFloat timeLabelY = CGRectGetMaxY(_nameLabelF) + WBStatusCellBorder;
-    CGSize timeLabelSize = [status.created_at sizeWithFont:WBStatusTimeFont];
+    CGSize timeLabelSize=[status.created_at sizeWithAttributes:@{NSFontAttributeName:WBStatusTimeFont}];
     _timeLabelF = (CGRect){{timeLabelX, timeLabelY}, timeLabelSize};
     
     // 6.来源
     CGFloat sourceLabelX =CGRectGetMaxX(_timeLabelF) + WBStatusCellBorder;
     CGFloat sourceLabelY = timeLabelY;
-    CGSize sourceLabelSize = [status.source sizeWithFont:WBStatusSourceFont];
+    CGSize sourceLabelSize = [status.source sizeWithAttributes:@{NSFontAttributeName:WBStatusSourceFont}];
     _sourceLabelF = (CGRect){{sourceLabelX, sourceLabelY}, sourceLabelSize};
     
     // 7.微博正文内容
     CGFloat contentLabelX = iconViewX;
     CGFloat contentLabelY = MAX(CGRectGetMaxY(_timeLabelF), CGRectGetMaxY(_iconViewF)) + WBStatusCellBorder;
     CGFloat contentLabelMaxW = topViewW - 2 * WBStatusCellBorder;
-    CGSize contentLabelSize = [status.text sizeWithFont:WBStatusContentFont constrainedToSize:CGSizeMake(contentLabelMaxW, MAXFLOAT)];
+//    CGSize contentLabelSize = [status.text sizeWithFont:WBStatusContentFont constrainedToSize:CGSizeMake(contentLabelMaxW, MAXFLOAT)];
+
+    CGSize contentLabelSize=[status.text boundingRectWithSize:CGSizeMake(contentLabelMaxW, MAXFLOAT) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:WBStatusNameFont} context:nil].size;
     _contentLabelF = (CGRect){{contentLabelX, contentLabelY}, contentLabelSize};
     
     // 8.配图
     if(status.pic_urls){
-        NSLog(@"---%@",status.pic_urls);
-        CGFloat photoViewWH = 100;
+        NSLog(@"有配图---%@",status.thumbnail_pic);
+        NSURL*url=[NSURL URLWithString:status.thumbnail_pic];
+        NSData* data=[NSData dataWithContentsOfURL:url];
+        UIImage* image=[UIImage imageWithData:data];
+        NSLog(@"image:%@",image);
         CGFloat photoViewX = contentLabelX;
         CGFloat photoViewY = CGRectGetMaxY(_contentLabelF) + WBStatusCellBorder;
-        _photoViewF = CGRectMake(photoViewX, photoViewY, photoViewWH, photoViewWH);
+        _photoViewF = CGRectMake(photoViewX, photoViewY, image.size.width*1.5, image.size.height*1.2);
     
     
     }else if (status.thumbnail_pic){
+        NSLog(@"有单张配图---%@",status.thumbnail_pic);
         CGFloat photoViewWH = 70;
         CGFloat photoViewX = contentLabelX;
         CGFloat photoViewY = CGRectGetMaxY(_contentLabelF) + WBStatusCellBorder;
@@ -109,7 +115,12 @@
             CGFloat retweetPhotoViewWH = 70;
             CGFloat retweetPhotoViewX = retweetContentLabelX;
             CGFloat retweetPhotoViewY = CGRectGetMaxY(_retweetContentLabelF) + WBStatusCellBorder;
-            _retweetPhotoViewF = CGRectMake(retweetPhotoViewX, retweetPhotoViewY, retweetPhotoViewWH, retweetPhotoViewWH);
+   
+            NSURL*url=[NSURL URLWithString:status.retweeted_status.thumbnail_pic];
+            NSData* data=[NSData dataWithContentsOfURL:url];
+            UIImage* image=[[UIImage alloc]initWithData:data];
+            
+            _retweetPhotoViewF = CGRectMake(retweetPhotoViewX, retweetPhotoViewY, image.size.width*1.2, image.size.height*1.2);
             
             retweetViewH = CGRectGetMaxY(_retweetPhotoViewF);
         } else { // 没有配图
