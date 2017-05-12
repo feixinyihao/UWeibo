@@ -239,7 +239,7 @@
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:user.profile_image_url]  placeholderImage:[UIImage imageNamed:@"avatar_default_small"]];
     self.iconView .layer.masksToBounds=YES;
     self.iconView .layer.cornerRadius=self.iconView.frame.size.height/2.0f; //设置为图片宽度的一半出来为圆形
-    self.iconView .layer.borderWidth=1.0f; //边框宽度
+    self.iconView .layer.borderWidth=1.0f; //边框宽
     self.iconView .layer.borderColor=[[UIColor whiteColor] CGColor];//边框颜色
 
    
