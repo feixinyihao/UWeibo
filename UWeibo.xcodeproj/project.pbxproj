@@ -44,6 +44,7 @@
 		694A7CC01EC4048100EB6308 /* UniHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A7CBF1EC4048100EB6308 /* UniHttpTool.m */; };
 		694A7CC31EC404E800EB6308 /* UIImage+WB.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A7CC21EC404E800EB6308 /* UIImage+WB.m */; };
 		694A7CC61EC404FE00EB6308 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A7CC51EC404FE00EB6308 /* XMLParser.m */; };
+		694A7CC91EC576D800EB6308 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A7CC81EC576D800EB6308 /* ViewController.m */; };
 		69610FCF1EC3D88E00D43EE8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69610FCE1EC3D88E00D43EE8 /* main.m */; };
 		69610FD21EC3D88E00D43EE8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69610FD11EC3D88E00D43EE8 /* AppDelegate.m */; };
 		69610FDA1EC3D88E00D43EE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69610FD91EC3D88E00D43EE8 /* Assets.xcassets */; };
@@ -146,6 +147,8 @@
 		694A7CC21EC404E800EB6308 /* UIImage+WB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WB.m"; sourceTree = "<group>"; };
 		694A7CC41EC404FE00EB6308 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
 		694A7CC51EC404FE00EB6308 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; };
+		694A7CC71EC576D800EB6308 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = other/ViewController.h; sourceTree = "<group>"; };
+		694A7CC81EC576D800EB6308 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = other/ViewController.m; sourceTree = "<group>"; };
 		69610FCA1EC3D88E00D43EE8 /* UWeibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UWeibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69610FCE1EC3D88E00D43EE8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		69610FD01EC3D88E00D43EE8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
@@ -397,6 +400,8 @@
 				694A7C4B1EC4033900EB6308 /* main */,
 				69610FD91EC3D88E00D43EE8 /* Assets.xcassets */,
 				69610FDE1EC3D88E00D43EE8 /* Info.plist */,
+				694A7CC71EC576D800EB6308 /* ViewController.h */,
+				694A7CC81EC576D800EB6308 /* ViewController.m */,
 				69610FCD1EC3D88E00D43EE8 /* Supporting Files */,
 			);
 			path = UWeibo;
@@ -635,6 +640,7 @@
 				694A7CC61EC404FE00EB6308 /* XMLParser.m in Sources */,
 				694A7CBA1EC4042400EB6308 /* NSBundle+MJRefresh.m in Sources */,
 				694A7C6C1EC4033900EB6308 /* WBContentController.m in Sources */,
+				694A7CC91EC576D800EB6308 /* ViewController.m in Sources */,
 				694A7CC31EC404E800EB6308 /* UIImage+WB.m in Sources */,
 				694A7CB01EC4042400EB6308 /* MJRefreshAutoNormalFooter.m in Sources */,
 				694A7CB61EC4042400EB6308 /* MJRefreshNormalHeader.m in Sources */,
