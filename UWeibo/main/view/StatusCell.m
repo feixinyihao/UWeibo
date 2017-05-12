@@ -252,9 +252,10 @@
     // 4.vip
     if (user.isVip) {
         self.vipView.hidden = NO;
+        self.vipView.frame = self.statusFrame.vipViewF;
         self.vipView.image = [UIImage imageNamed:@"common_icon_membership"];
         
-        self.vipView.frame = self.statusFrame.vipViewF;
+        
     } else {
         self.vipView.hidden = YES;
     }

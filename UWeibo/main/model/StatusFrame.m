@@ -36,11 +36,10 @@
     
     // 4.会员图标
     if (status.user.isVip) {
-        CGFloat vipViewW = 14;
         CGFloat vipViewH = nameLabelSize.height;
         CGFloat vipViewX = CGRectGetMaxX(_nameLabelF) + WBStatusCellBorder;
         CGFloat vipViewY = nameLabelY;
-        _vipViewF = CGRectMake(vipViewX, vipViewY, vipViewW, vipViewH);
+        _vipViewF = CGRectMake(vipViewX, vipViewY, vipViewH, vipViewH);
     }
     
     // 5.时间
