@@ -43,7 +43,7 @@
     self.selectedButton.selected=NO;
     button.selected=YES;
     self.selectedButton=button;
-    [button setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
 
     
 }
