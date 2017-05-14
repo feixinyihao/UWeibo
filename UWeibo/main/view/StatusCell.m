@@ -13,7 +13,6 @@
 #import "StatusFrame.h"
 #import "WeiboUser.h"
 #import "XMLParser.h"
-
 @interface StatusCell()<NSXMLParserDelegate>
 /** 顶部的view */
 @property (nonatomic, weak) UIImageView *topView;
@@ -22,7 +21,9 @@
 /** 会员图标 */
 @property (nonatomic, weak) UIImageView *vipView;
 /** 配图 */
-@property (nonatomic, weak) UIImageView *photoView;
+@property (nonatomic, weak) UIView *photoView;
+
+@property(nonatomic,weak)UIButton* photoBtn;
 /** 昵称 */
 @property (nonatomic, weak) UILabel *nameLabel;
 /** 时间 */
@@ -51,11 +52,13 @@
 
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *ID = @"status";
-    StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell == nil) {
-        cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
-    }
+   // static NSString *ID = @"status";
+    StatusCell* cell=[[StatusCell alloc]init];
+  //  StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+//    if (cell == nil) {
+//        cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+//    }
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -99,7 +102,7 @@
     self.vipView = vipView;
     
     /** 4.配图 */
-    UIImageView *photoView = [[UIImageView alloc] init];
+    UIView *photoView = [[UIView alloc] init];
     [self.topView addSubview:photoView];
     self.photoView = photoView;
     
@@ -282,11 +285,42 @@
     if (status.thumbnail_pic) {
         self.photoView.hidden = NO;
         self.photoView.frame = self.statusFrame.photoViewF;
-        [self.photoView sd_setImageWithURL:[NSURL URLWithString:status.thumbnail_pic] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder_os7"]];
+        if (status.pic_urls.count>1) {
+            for (int i=0; i<status.pic_urls.count; i++) {
+                UIImageView* imageview=[[UIImageView alloc]init];
+                NSDictionary* imagedic=status.pic_urls[i];
+                [imageview sd_setImageWithURL:[NSURL URLWithString:imagedic[@"thumbnail_pic"]] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder_os7"]];
+                CGFloat imageW=(self.photoView.bounds.size.width-2*WBStatusTableBorder)/3;
+                CGFloat imageH=imageW;
+                CGFloat imageX=(i%3)*(imageW+WBStatusTableBorder);
+                CGFloat imageY=(i/3)*(imageW+WBStatusTableBorder);
+                imageview.frame=CGRectMake(imageX, imageY, imageW, imageH);
+                imageview.userInteractionEnabled=YES;
+                UIGestureRecognizer* gest=[[UIGestureRecognizer alloc]initWithTarget:self action:@selector(clickImage:)];
+                [imageview addGestureRecognizer:gest];
+                imageview.tag=i;
+                [self.photoView addSubview:imageview];
+                }
+        }else{
+        
+            UIImageView* imageview=[[UIImageView alloc]init];
+            [imageview sd_setImageWithURL:[NSURL URLWithString:status.thumbnail_pic] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder_os7"]];
+            imageview.frame=self.photoView.bounds;
+            [self.photoView addSubview:imageview];
+        
+        }
     } else {
         self.photoView.hidden = YES;
     }
 }
+-(void)clickImage:(UITapGestureRecognizer *)gestureRecognizer
+{
+    NSLog(@"click");
+    
+    
+    
+}
+
 
 /**
  *  被转发微博

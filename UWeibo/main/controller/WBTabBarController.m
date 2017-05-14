@@ -39,7 +39,7 @@
     //NSLog(@"%@",self.tabBar.subviews);
 }
 
--(void)tabBardidClick:(WBTabbar*)tabBar from:(int)from to:(int)to{
+-(void)tabBardidClick:(WBTabbar*)tabBar from:(NSInteger)from to:(NSInteger)to{
 
   //  NSLog(@"%d,%d",from,to);
     self.selectedIndex=to;
@@ -61,18 +61,18 @@
  */
 -(void)setupAllChildView{
     WbHomeTableViewController* home=[[WbHomeTableViewController alloc]init];
-    [self SetupChileViewConterller:home title:@"首页" imageName:@"tabbar_home_os7" selectedImageName:@"tabbar_home_selected_os7"];
+    [self SetupChileViewConterller:home title:@"微博" imageName:@"tabbar_home" selectedImageName:@"tabbar_home_selected"];
    
     WBMessageTableViewController* message=[[WBMessageTableViewController alloc]init];
-    [self SetupChileViewConterller:message title:@"消息" imageName:@"tabbar_message_center_os7" selectedImageName:@"tabbar_message_center_selected_os7"];
+    [self SetupChileViewConterller:message title:@"消息" imageName:@"tabbar_message_center" selectedImageName:@"tabbar_message_center_selected"];
     
     WBDiscoverTableViewController* discover=[[WBDiscoverTableViewController alloc]init];
-    [self SetupChileViewConterller:discover title:@"发现" imageName:@"tabbar_discover_os7" selectedImageName:@"tabbar_discover_selected_os7"];
+    [self SetupChileViewConterller:discover title:@"发现" imageName:@"tabbar_discover" selectedImageName:@"tabbar_discover_selected"];
     
    
     
     WBMeTableViewController* me=[[WBMeTableViewController alloc]init];
-    [self SetupChileViewConterller:me title:@"我" imageName:@"tabbar_profile_os7" selectedImageName:@"tabbar_profile_selected_os7"];
+    [self SetupChileViewConterller:me title:@"我" imageName:@"tabbar_profile" selectedImageName:@"tabbar_profile_selected"];
     
 }
 /**

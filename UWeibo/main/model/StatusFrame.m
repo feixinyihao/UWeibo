@@ -64,25 +64,28 @@
     _contentLabelF = (CGRect){{contentLabelX, contentLabelY}, contentLabelSize};
     
     // 8.配图
-    if(status.pic_urls){
-        NSLog(@"有配图---%@",status.thumbnail_pic);
-        NSURL*url=[NSURL URLWithString:status.thumbnail_pic];
-        NSData* data=[NSData dataWithContentsOfURL:url];
-        UIImage* image=[UIImage imageWithData:data];
-        NSLog(@"image:%@",image);
-        CGFloat photoViewX = contentLabelX;
-        CGFloat photoViewY = CGRectGetMaxY(_contentLabelF) + WBStatusCellBorder;
-        _photoViewF = CGRectMake(photoViewX, photoViewY, image.size.width*1.5, image.size.height*1.2);
     
-    
-    }else if (status.thumbnail_pic){
-        NSLog(@"有单张配图---%@",status.thumbnail_pic);
-        CGFloat photoViewWH = 70;
-        CGFloat photoViewX = contentLabelX;
-        CGFloat photoViewY = CGRectGetMaxY(_contentLabelF) + WBStatusCellBorder;
-        _photoViewF = CGRectMake(photoViewX, photoViewY, photoViewWH, photoViewWH);
-    }
+    if (status.thumbnail_pic) {
+        if(status.pic_urls.count==1){
+            
+            NSURL*url=[NSURL URLWithString:status.thumbnail_pic];
+            NSData* data=[NSData dataWithContentsOfURL:url];
+            UIImage* image=[UIImage imageWithData:data];
+            CGFloat photoViewX = contentLabelX;
+            CGFloat photoViewY = CGRectGetMaxY(_contentLabelF) + WBStatusCellBorder;
+            _photoViewF = CGRectMake(photoViewX, photoViewY, image.size.width*1.2, image.size.height*1.2);
+            
+            
+        }else if (status.pic_urls.count>1){
+            CGFloat photoViewW = contentLabelMaxW;
+            CGFloat photoViewH=((status.pic_urls.count-1)/3)*(photoViewW-2*WBStatusTableBorder)/3+(photoViewW-2*WBStatusTableBorder)/3;
+            CGFloat photoViewX = contentLabelX;
+            CGFloat photoViewY = CGRectGetMaxY(_contentLabelF) + WBStatusCellBorder;
+            _photoViewF = CGRectMake(photoViewX, photoViewY, photoViewW, photoViewH);
+        }
+        
 
+    }
     
     // 9.被转发微博
     if (status.retweeted_status) {

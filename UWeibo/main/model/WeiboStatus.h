@@ -40,7 +40,7 @@
 /**
  *  多张配图
  */
-@property(nonatomic,copy)NSString* pic_urls;
+@property(nonatomic,copy)NSArray* pic_urls;
 /**
  *  评论数
  */

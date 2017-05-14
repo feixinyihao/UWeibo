@@ -11,7 +11,7 @@
 @protocol WBTabBarDelegate <NSObject>
 
 @optional
--(void)tabBardidClick:(WBTabbar*)tabBar from:(int)from to:(int)to;
+-(void)tabBardidClick:(WBTabbar*)tabBar from:(NSInteger)from to:(NSInteger)to;
 @end
 @interface WBTabbar : UIView
 -(void)addButtonWithItem:(UITabBarItem*)item;
