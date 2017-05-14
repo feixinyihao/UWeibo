@@ -18,5 +18,5 @@
 
 @interface WbHomeTableViewController : UITableViewController
 @property(nonatomic,strong)id <WbHomeTableViewControllerDelete>delete;
-@property(nonatomic,strong)NSArray* statusFrames;
+@property(nonatomic,strong)NSMutableArray* statusFrames;
 @end

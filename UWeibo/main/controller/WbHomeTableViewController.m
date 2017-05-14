@@ -19,7 +19,8 @@
 #import "UIImageView+WebCache.h"
 @interface WbHomeTableViewController ()
 
-@property(nonatomic,strong)NSArray* statuses;
+@property(nonatomic,strong)NSMutableArray* statuses;
+@property (nonatomic, weak) MJRefreshFooter *footer;
 @end
 
 @implementation WbHomeTableViewController
@@ -34,14 +35,50 @@
      */
     self.tableView.mj_header=[MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self setupStatus];
-        [self.tableView.mj_header endRefreshing];
+        
     
     }];
     /**
      *  上拉加载更多
      */
+    self.tableView.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [self loadMoreData];
+       
+    }];
+   
 }
+-(void)loadMoreData{
 
+    AFHTTPSessionManager* manager=[AFHTTPSessionManager manager];
+    NSMutableDictionary* parm=[NSMutableDictionary dictionary];
+    NSString* doc=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];
+    NSString* file=[doc stringByAppendingString:@"/accout.data"];
+    OAuth * acc=[NSKeyedUnarchiver unarchiveObjectWithFile:file];
+    parm[@"access_token"]=acc.access_token;
+    parm[@"count"]=@20;
+    if (self.statusFrames.count) {
+        StatusFrame* statusframe=[self.statusFrames lastObject];
+        parm[@"since_id"]=statusframe.status.idstr;
+    }
+    [manager GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parm progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
+        for (NSDictionary* dic in responseObject[@"statuses"]) {
+            WeiboStatus* status=[WeiboStatus statusWithDict:dic];
+            [self.statuses addObject:status];
+        }
+        for (WeiboStatus* status in self.statuses) {
+            StatusFrame* statusframe=[[StatusFrame alloc]init];
+            statusframe.status=status;
+            [self.statusFrames addObject:statusframe];
+        }
+        [self.tableView reloadData];
+        [self.tableView.mj_footer endRefreshing];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+         [self.tableView.mj_footer endRefreshing];
+    }];
+}
 /**
  *  初始化微博信息
  */
@@ -53,7 +90,7 @@
     NSString* file=[doc stringByAppendingString:@"/accout.data"];
     OAuth * acc=[NSKeyedUnarchiver unarchiveObjectWithFile:file];
     parameters[@"access_token"]=acc.access_token;
-    parameters[@"count"]=@"50";
+    parameters[@"count"]=@50;
     //NSLog(@"----%@",acc.access_token);
     //parameters[@"count"]=@2;
     [manager GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -70,7 +107,7 @@
             
         }
         if (self.statuses==nil) {
-            self.statuses=[NSArray array];
+            self.statuses=[NSMutableArray array];
         }
         self.statuses = statusArr;
         
@@ -87,9 +124,11 @@
         self.statusFrames = statusFrameArray;
         //NSLog(@"%@",self.statusFrames);
         [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"出错了%@",error);
+        [self.tableView.mj_header endRefreshing];
     }];
     
 }
