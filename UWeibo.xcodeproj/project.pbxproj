@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6937DF351EC8393A001FC656 /* weibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6937DF341EC8393A001FC656 /* weibo.png */; };
+		6937DF381EC9CF51001FC656 /* JpPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 6937DF371EC9CF51001FC656 /* JpPhoto.m */; };
 		694A7C6B1EC4033900EB6308 /* OAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A7C4E1EC4033900EB6308 /* OAuthViewController.m */; };
 		694A7C6C1EC4033900EB6308 /* WBContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A7C501EC4033900EB6308 /* WBContentController.m */; };
 		694A7C6D1EC4033900EB6308 /* WBDiscoverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A7C521EC4033900EB6308 /* WBDiscoverTableViewController.m */; };
@@ -75,6 +76,8 @@
 /* Begin PBXFileReference section */
 		067B9F18D650683D9F0E4C9E /* libPods-UWeibo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UWeibo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6937DF341EC8393A001FC656 /* weibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo.png; sourceTree = "<group>"; };
+		6937DF361EC9CF51001FC656 /* JpPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JpPhoto.h; sourceTree = "<group>"; };
+		6937DF371EC9CF51001FC656 /* JpPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JpPhoto.m; sourceTree = "<group>"; };
 		694A7C4D1EC4033900EB6308 /* OAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthViewController.h; sourceTree = "<group>"; };
 		694A7C4E1EC4033900EB6308 /* OAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthViewController.m; sourceTree = "<group>"; };
 		694A7C4F1EC4033900EB6308 /* WBContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBContentController.h; sourceTree = "<group>"; };
@@ -245,6 +248,8 @@
 				694A7C611EC4033900EB6308 /* WeiboStatus.m */,
 				694A7C621EC4033900EB6308 /* WeiboUser.h */,
 				694A7C631EC4033900EB6308 /* WeiboUser.m */,
+				6937DF361EC9CF51001FC656 /* JpPhoto.h */,
+				6937DF371EC9CF51001FC656 /* JpPhoto.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -532,6 +537,7 @@
 				TargetAttributes = {
 					69610FC91EC3D88E00D43EE8 = {
 						CreatedOnToolsVersion = 8.3.1;
+						DevelopmentTeam = Z657UM2C6Z;
 						ProvisioningStyle = Automatic;
 					};
 					69610FE21EC3D88E00D43EE8 = {
@@ -647,6 +653,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6937DF381EC9CF51001FC656 /* JpPhoto.m in Sources */,
 				694A7C701EC4033900EB6308 /* WBMeTableViewController.m in Sources */,
 				694A7C721EC4033900EB6308 /* OAuth.m in Sources */,
 				694A7C6B1EC4033900EB6308 /* OAuthViewController.m in Sources */,
@@ -828,6 +835,7 @@
 			baseConfigurationReference = 752F0D16DFFC170B8CF9CAFB /* Pods-UWeibo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Z657UM2C6Z;
 				INFOPLIST_FILE = UWeibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.justprint.UWeibo;
@@ -840,6 +848,7 @@
 			baseConfigurationReference = 91F73E7DBD4420D47073A087 /* Pods-UWeibo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Z657UM2C6Z;
 				INFOPLIST_FILE = UWeibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.justprint.UWeibo;

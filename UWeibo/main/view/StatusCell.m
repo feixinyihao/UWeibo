@@ -13,6 +13,7 @@
 #import "StatusFrame.h"
 #import "WeiboUser.h"
 #import "XMLParser.h"
+#import "JpPhoto.h"
 @interface StatusCell()<NSXMLParserDelegate>
 /** 顶部的view */
 @property (nonatomic, weak) UIImageView *topView;
@@ -52,13 +53,31 @@
 
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-   // static NSString *ID = @"status";
-    StatusCell* cell=[[StatusCell alloc]init];
-  //  StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-//    if (cell == nil) {
-//        cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
-//    }
+    
+    static NSString *ID = @"status";
+    //StatusCell* cell=[[StatusCell alloc]init];
+    StatusCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (cell == nil) {
+        cell = [[StatusCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+    }else//当页面拉动的时候 当cell存在并且最后一个存在 把它进行删除就出来一个独特的cell我们在进行数据配置即可避免
+    {
+        while ([cell.subviews lastObject] != nil) {
+        
+            [(UIView *)[cell.subviews lastObject] removeFromSuperview];
+        }
+        // 1.添加原创微博内部的子控件
+        [cell setupOriginalSubviews];
+        
+        // 2.添加被转发微博内部的子控件
+        [cell setupRetweetSubviews];
+        
+        // 3.添加微博的工具条
+        [cell setupStatusToolBar];
+
+    }
+
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    cell.contentView.userInteractionEnabled=YES;
     return cell;
 }
 
@@ -87,8 +106,10 @@
     
     /** 1.顶部的view */
     UIImageView *topView = [[UIImageView alloc] init];
+    topView.userInteractionEnabled=YES;
     topView.image = [UIImage resizableWithImageName:@"timeline_card_top_background_os7"];
-    [self.contentView addSubview:topView];
+    [self addSubview:topView];
+
     self.topView = topView;
     
     /** 2.头像 */
@@ -103,6 +124,7 @@
     
     /** 4.配图 */
     UIView *photoView = [[UIView alloc] init];
+    photoView.userInteractionEnabled=YES;
     [self.topView addSubview:photoView];
     self.photoView = photoView;
     
@@ -288,15 +310,21 @@
         if (status.pic_urls.count>1) {
             for (int i=0; i<status.pic_urls.count; i++) {
                 UIImageView* imageview=[[UIImageView alloc]init];
+      
                 NSDictionary* imagedic=status.pic_urls[i];
-                [imageview sd_setImageWithURL:[NSURL URLWithString:imagedic[@"thumbnail_pic"]] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder_os7"]];
+                JpPhoto* jpphoto=[JpPhoto jpphotoWithDic:imagedic];
+                [imageview sd_setImageWithURL:[NSURL URLWithString:jpphoto.thumbnail_pic] placeholderImage:[UIImage imageNamed:@"timeline_image_placeholder_os7"]];
+                [imageview setContentScaleFactor:[[UIScreen mainScreen] scale]];
+                imageview.contentMode =  UIViewContentModeScaleAspectFill;
+                imageview.autoresizingMask=UIViewAutoresizingFlexibleHeight;
+                imageview.clipsToBounds=YES;
                 CGFloat imageW=(self.photoView.bounds.size.width-2*WBStatusTableBorder)/3;
                 CGFloat imageH=imageW;
                 CGFloat imageX=(i%3)*(imageW+WBStatusTableBorder);
                 CGFloat imageY=(i/3)*(imageW+WBStatusTableBorder);
                 imageview.frame=CGRectMake(imageX, imageY, imageW, imageH);
                 imageview.userInteractionEnabled=YES;
-                UIGestureRecognizer* gest=[[UIGestureRecognizer alloc]initWithTarget:self action:@selector(clickImage:)];
+                UIGestureRecognizer* gest=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickImage:)];
                 [imageview addGestureRecognizer:gest];
                 imageview.tag=i;
                 [self.photoView addSubview:imageview];

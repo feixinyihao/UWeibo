@@ -21,6 +21,7 @@
 
 @property(nonatomic,strong)NSMutableArray* statuses;
 @property (nonatomic, weak) MJRefreshFooter *footer;
+
 @end
 
 @implementation WbHomeTableViewController
@@ -55,26 +56,34 @@
     NSString* file=[doc stringByAppendingString:@"/accout.data"];
     OAuth * acc=[NSKeyedUnarchiver unarchiveObjectWithFile:file];
     parm[@"access_token"]=acc.access_token;
-    parm[@"count"]=@20;
+
+    parm[@"count"]=@5;
+    
     if (self.statusFrames.count) {
+        
         StatusFrame* statusframe=[self.statusFrames lastObject];
-        parm[@"since_id"]=statusframe.status.idstr;
+        parm[@"max_id"]=@([statusframe.status.idstr longLongValue]-1);
+        
     }
-    [manager GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parm progress:^(NSProgress * _Nonnull downloadProgress) {
+    NSLog(@"参数%@",parm);
+    [manager GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:parm progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@",responseObject);
         for (NSDictionary* dic in responseObject[@"statuses"]) {
             WeiboStatus* status=[WeiboStatus statusWithDict:dic];
-            [self.statuses addObject:status];
-        }
-        for (WeiboStatus* status in self.statuses) {
             StatusFrame* statusframe=[[StatusFrame alloc]init];
             statusframe.status=status;
             [self.statusFrames addObject:statusframe];
+            NSLog(@"id:%@",status.idstr);
+            [self.statuses addObject:status];
+            
         }
+        
+        
         [self.tableView reloadData];
+        NSLog(@"%ld,%ld",self.statusFrames.count,self.statuses.count);
         [self.tableView.mj_footer endRefreshing];
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
          [self.tableView.mj_footer endRefreshing];
     }];
@@ -90,10 +99,9 @@
     NSString* file=[doc stringByAppendingString:@"/accout.data"];
     OAuth * acc=[NSKeyedUnarchiver unarchiveObjectWithFile:file];
     parameters[@"access_token"]=acc.access_token;
-    parameters[@"count"]=@50;
     //NSLog(@"----%@",acc.access_token);
-    //parameters[@"count"]=@2;
-    [manager GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
+    parameters[@"count"]=@20;
+    [manager GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
     
         NSLog(@"加载中。。。");
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -103,7 +111,8 @@
         for (NSDictionary * statusDic in responseObject[@"statuses"]) {
             WeiboStatus* status=[WeiboStatus statusWithDict:statusDic];
             [statusArr addObject:status];
-            //NSLog(@"--%@",status.pic_urls);
+            
+            //NSLog(@"--%@",status.idstr);
             
         }
         if (self.statuses==nil) {
@@ -125,6 +134,7 @@
         //NSLog(@"%@",self.statusFrames);
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
+        NSLog(@"%ld",self.statusFrames.count);
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"出错了%@",error);
@@ -154,6 +164,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     StatusFrame *statusFrame = self.statusFrames[indexPath.row];
     return statusFrame.cellHeight;
 }
