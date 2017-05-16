@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6937DF351EC8393A001FC656 /* weibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6937DF341EC8393A001FC656 /* weibo.png */; };
 		6937DF381EC9CF51001FC656 /* JpPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 6937DF371EC9CF51001FC656 /* JpPhoto.m */; };
+		6937DF3A1ECA9F97001FC656 /* wechat.png in Resources */ = {isa = PBXBuildFile; fileRef = 6937DF391ECA9F97001FC656 /* wechat.png */; };
 		694A7C6B1EC4033900EB6308 /* OAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A7C4E1EC4033900EB6308 /* OAuthViewController.m */; };
 		694A7C6C1EC4033900EB6308 /* WBContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A7C501EC4033900EB6308 /* WBContentController.m */; };
 		694A7C6D1EC4033900EB6308 /* WBDiscoverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 694A7C521EC4033900EB6308 /* WBDiscoverTableViewController.m */; };
@@ -78,6 +79,7 @@
 		6937DF341EC8393A001FC656 /* weibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weibo.png; sourceTree = "<group>"; };
 		6937DF361EC9CF51001FC656 /* JpPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JpPhoto.h; sourceTree = "<group>"; };
 		6937DF371EC9CF51001FC656 /* JpPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JpPhoto.m; sourceTree = "<group>"; };
+		6937DF391ECA9F97001FC656 /* wechat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wechat.png; sourceTree = "<group>"; };
 		694A7C4D1EC4033900EB6308 /* OAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthViewController.h; sourceTree = "<group>"; };
 		694A7C4E1EC4033900EB6308 /* OAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthViewController.m; sourceTree = "<group>"; };
 		694A7C4F1EC4033900EB6308 /* WBContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBContentController.h; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 		6937DF331EC8393A001FC656 /* GitImage */ = {
 			isa = PBXGroup;
 			children = (
+				6937DF391ECA9F97001FC656 /* wechat.png */,
 				6937DF341EC8393A001FC656 /* weibo.png */,
 			);
 			name = GitImage;
@@ -580,6 +583,7 @@
 				69610FDD1EC3D88E00D43EE8 /* LaunchScreen.storyboard in Resources */,
 				69610FDA1EC3D88E00D43EE8 /* Assets.xcassets in Resources */,
 				6937DF351EC8393A001FC656 /* weibo.png in Resources */,
+				6937DF3A1ECA9F97001FC656 /* wechat.png in Resources */,
 				694A7CB81EC4042400EB6308 /* MJRefresh.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
